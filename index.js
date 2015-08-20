@@ -1,16 +1,13 @@
 var ss = require("sdk/simple-storage");
 var preferences = require("sdk/simple-prefs").prefs;
 var { setTimeout } = require("sdk/timers");
+var { Request } = require("sdk/request");
 var panel;
 
 // check to see if storage exists
 if(!ss.storage.visitCounter) {
     ss.storage.visitCounter = 0;
     // Tracks the visitCounter
-}
-if(!ss.storage.apikey) {
-    ss.storage.apikey = "";
-    // The apikey used
 }
 if(!ss.storage.urlwhitelist) {
     ss.storage.urlwhitelist = [];
@@ -22,6 +19,9 @@ require("sdk/tabs").on("ready", checkPage);
 function checkPage(tab) {
     if(true) {
         ss.storage.visitCounter = ss.storage.visitCounter + 1;
+        Request({
+            url: preferences.statsurl + "?apikey=" + preferences.apikey + "&count=" + ss.storage.visitCounter,
+        });
         makePanel();
     }
 }

@@ -17,17 +17,34 @@
   },
   "license": "GPL-3.0",
   "id": "workaccounter@arenlor.com",
-  "homepage": "https://github.com/Arenlor/workaccounter",
+  "homepage": "https://arenlor.com/workaccounter/",
   "permissions": {
     "private-browsing": true,
     "multiprocess": true
   },
   "preferences": [{
-    "name": "timeout",
-    "description": "How many seconds to show the panel on visit.",
-    "hidden": false,
-    "value": 3,
-    "title": "Panel Timeout",
-    "type": "integer"
-  }]
+      "name": "timeout",
+      "description": "How many seconds to show the panel on visit.",
+      "hidden": false,
+      "value": 3,
+      "title": "Panel Timeout",
+      "type": "integer"
+    },
+    {
+      "name": "statsurl",
+      "description": "The URL of your Accountability website.",
+      "hidden": false,
+      "value": "https://arenlor.com/workaccounter/submit.php",
+      "title": "Stats URL",
+      "type": "string"
+    },
+    {
+      "name": "apikey",
+      "description": "The API Key provided by your Accountability website.",
+      "hidden": false,
+      "value": "",
+      "title": "API Key",
+      "type": "string"
+    }
+  ]
 }
