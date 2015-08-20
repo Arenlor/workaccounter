@@ -1,0 +1,25 @@
+{
+  "title": "Work Accounter",
+  "name": "workaccounter",
+  "version": "0.0.1",
+  "description": "Keeps you accountable to doing your work by tracking your website visits.",
+  "main": "index.js",
+  "author": {
+    "name": "Jerod Lycett (Arenlor)"
+  },
+  "translators": [
+    {
+      "name": "Arenlor <en-US>"
+    }
+  ],
+  "engines": {
+    "firefox": ">=38.0a1"
+  },
+  "license": "GPL-3.0",
+  "id": "workaccounter@arenlor.com",
+  "homepage": "https://github.com/Arenlor/workaccounter",
+  "permissions": {
+    "private-browsing": true,
+    "multiprocess": true
+  }
+}
