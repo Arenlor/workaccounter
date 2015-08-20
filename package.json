@@ -23,14 +23,6 @@
     "multiprocess": true
   },
   "preferences": [{
-    "name": "visitCounter",
-    "description": "The number of times a non-work page has been visited.",
-    "hidden": true,
-    "value": 0,
-    "title": "Number of visits",
-    "type": "integer"
-  },
-  {
     "name": "timeout",
     "description": "How many seconds to show the panel on visit.",
     "hidden": false,
