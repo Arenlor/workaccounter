@@ -17,7 +17,13 @@ if(!ss.storage.urlwhitelist) {
 // On load see if the page is in whitelist, if not increment counter.
 require("sdk/tabs").on("ready", checkPage);
 function checkPage(tab) {
-    if(true) {
+    var isWhite = false;
+    for(var i in ss.storage.urlwhitelist) {
+        if(tab.url.search(ss.storage.urlwhitelist[i]) != -1) {
+            isWhite = true;
+        }
+    }
+    if(!isWhite) {
         ss.storage.visitCounter = ss.storage.visitCounter + 1;
         Request({
             url: preferences.statsurl + "?apikey=" + preferences.apikey + "&count=" + ss.storage.visitCounter,
