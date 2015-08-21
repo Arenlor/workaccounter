@@ -1,7 +1,7 @@
 {
   "title": "Work Accounter",
   "name": "workaccounter",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Keeps you accountable to doing your work by tracking your website visits.",
   "main": "index.js",
   "author": {

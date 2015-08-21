@@ -30,7 +30,7 @@ function checkPage(tab) {
         ss.storage.visitCounter = ss.storage.visitCounter + 1;
         Request({
             url: sp.prefs.statsurl + "?apikey=" + sp.prefs.apikey + "&count=" + ss.storage.visitCounter
-        });
+        }).get();
         makePanel();
     }
 }
@@ -64,4 +64,4 @@ function whitelisteditor(worker) {
 sp.on("wleditor", function() {require("sdk/tabs").open("resource://workaccounter-at-arenlor-dot-com/data/whitelist.html");});
 
 // Resets the counter to 0 both in storage and on the server.
-sp.on("counterReset",function() {Request({url: sp.prefs.statsurl + "?apikey=" + sp.prefs.apikey + "&count=0"});ss.storage.visitCounter = 0;});
+sp.on("counterReset",function() {Request({url: sp.prefs.statsurl + "?apikey=" + sp.prefs.apikey + "&count=0"}).get();ss.storage.visitCounter = 0;});
