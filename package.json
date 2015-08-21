@@ -47,6 +47,14 @@
       "type": "string"
     },
     {
+      "name": "wleditor",
+      "description": "Open the Whitelist Editor.",
+      "hidden": false,
+      "title": "Whitelist Editor",
+      "type": "control",
+      "label": "Edit Whitelist"
+    },
+    {
       "name": "counterReset",
       "description": "Reset the counter to zero.",
       "hidden": false,

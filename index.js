@@ -2,6 +2,7 @@ var ss = require("sdk/simple-storage");
 var sp = require("sdk/simple-prefs");
 var { setTimeout } = require("sdk/timers");
 var { Request } = require("sdk/request");
+var { PageMod } = require("sdk/page-mod");
 var panel;
 
 // check to see if storage exists
@@ -45,6 +46,21 @@ function makePanel() {
     panel.show();
     setTimeout(function() {panel.hide();panel.destroy();}, sp.prefs.timeout * 1000);
 }
+
+PageMod({
+    include: "resource://workaccounter-at-arenlor-dot-com/data/whitelist.html",
+    contentScriptFile: "./../lib/whitelist.js",
+    contentScriptWhen: "ready",
+    onAttach: whitelisteditor
+});
+
+function whitelisteditor(worker) {
+    worker.port.emit("liststorage", ss.storage.urlwhitelist);
+    worker.port.on("editstorage", function(editstorage) {ss.storage.urlwhitelist = editstorage;});
+}
+
+// Launches the editor
+sp.on("wleditor", function() {require("sdk/tabs").open("resource://workaccounter-at-arenlor-dot-com/data/whitelist.html");});
 
 // Resets the counter to 0 both in storage and on the server.
 sp.on("counterReset",function() {Request({url: sp.prefs.statsurl + "?apikey=" + sp.prefs.apikey + "&count=0"});ss.storage.visitCounter = 0;});
