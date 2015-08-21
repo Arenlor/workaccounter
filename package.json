@@ -45,6 +45,14 @@
       "value": "",
       "title": "API Key",
       "type": "string"
+    },
+    {
+      "name": "counterReset",
+      "description": "Reset the counter to zero.",
+      "hidden": false,
+      "title": "Reset Counter",
+      "type": "control",
+      "label": "Reset Counter"
     }
   ]
 }

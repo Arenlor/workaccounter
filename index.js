@@ -1,5 +1,5 @@
 var ss = require("sdk/simple-storage");
-var preferences = require("sdk/simple-prefs").prefs;
+var sp = require("sdk/simple-prefs");
 var { setTimeout } = require("sdk/timers");
 var { Request } = require("sdk/request");
 var panel;
@@ -10,7 +10,7 @@ if(!ss.storage.visitCounter) {
     // Tracks the visitCounter
 }
 if(!ss.storage.urlwhitelist) {
-    ss.storage.urlwhitelist = [];
+    ss.storage.urlwhitelist = ["about:", "resource://"];
     // An array for the urls
 }
 
@@ -20,13 +20,15 @@ function checkPage(tab) {
     var isWhite = false;
     for(var i in ss.storage.urlwhitelist) {
         if(tab.url.search(ss.storage.urlwhitelist[i]) != -1) {
+            // Easy matching for domains or pages.
             isWhite = true;
         }
     }
     if(!isWhite) {
+        // Increment counter in storage, then send results to server.
         ss.storage.visitCounter = ss.storage.visitCounter + 1;
         Request({
-            url: preferences.statsurl + "?apikey=" + preferences.apikey + "&count=" + ss.storage.visitCounter,
+            url: sp.prefs.statsurl + "?apikey=" + sp.prefs.apikey + "&count=" + ss.storage.visitCounter
         });
         makePanel();
     }
@@ -41,5 +43,8 @@ function makePanel() {
     });
     panel.port.emit("counter", ss.storage.visitCounter);
     panel.show();
-    setTimeout(function() {panel.hide();panel.destroy();}, preferences.timeout * 1000);
+    setTimeout(function() {panel.hide();panel.destroy();}, sp.prefs.timeout * 1000);
 }
+
+// Resets the counter to 0 both in storage and on the server.
+sp.on("counterReset",function() {Request({url: sp.prefs.statsurl + "?apikey=" + sp.prefs.apikey + "&count=0"});ss.storage.visitCounter = 0;});
