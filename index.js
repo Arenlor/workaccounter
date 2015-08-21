@@ -55,8 +55,9 @@ PageMod({
 });
 
 function whitelisteditor(worker) {
+    // Sends and receives the whitelist, and lets it know it's okay to reload when saved.
     worker.port.emit("liststorage", ss.storage.urlwhitelist);
-    worker.port.on("editstorage", function(editstorage) {ss.storage.urlwhitelist = editstorage;});
+    worker.port.on("editstorage", function(editstorage) {ss.storage.urlwhitelist = editstorage; worker.port.emit("listsaved",true);});
 }
 
 // Launches the editor
